@@ -1,5 +1,40 @@
 # PHPMailer Change Log
 
+## WIP
+* Mark `ext-hash` as required in composer.json. This has long been required, but now it will cause an error at install time rather than runtime, making it easier to diagnose
+* Make file upload examples safer
+* Update links to SMTP testing servers
+* Avoid errors when set_time_limit is disabled (you need better hosting!)
+* Allow overriding auth settings for local tests; makes it easy to run tests using HELO
+
+## Version 6.1.7 (July 14th, 2020)
+* Split SMTP connection into two separate methods
+* Undo BC break in PHP versions 5.2.3 - 7.0.0 introduced in 6.1.2 when injecting callables for address validation and HTML to text conversion
+* Save response to SMTP welcome banner as other responses are saved
+* Retry stream_select if interrupted by a signal
+
+## Version 6.1.6 (May 27th, 2020)
+* **SECURITY** Fix insufficient output escaping bug in file attachment names. CVE-2020-13625. Reported by Elar Lang of Clarified Security.
+* Correct Armenian ISO language code from `am` to `hy`, add mapping for fallback
+* Use correct timeout property in debug output
+
+## Version 6.1.5 (March 14th, 2020)
+* Reject invalid custom headers that are empty or contain breaks
+* Various fixes for DKIM issues, especially when using `mail()` transport
+* Drop the `l=` length tag from DKIM signatures; it's a mild security risk
+* Ensure CRLF is used explicitly when needed, rather than `static::$LE`
+* Add a method for trimming header content consistently
+* Some minor tweaks to resolve static analyser complaints
+* Check that attachment files are readable both when adding *and* when sending
+* Work around Outlook bug in mishandling MIME preamble
+* Danish translation improvements
+
+## Version 6.1.4 (December 10th, 2019)
+* Clean up hostname handling
+* Avoid IDN error on older PHP versions, prep for PHP 8.0
+* Don't force RFC2047 folding unnecessarily
+* Enable tests on full release of PHP 7.4
+
 ## Version 6.1.3 (November 21st, 2019) 
 * Fix an issue preventing injected debug handlers from working
 * Fix an issue relating to connection timeout
