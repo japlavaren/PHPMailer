@@ -2856,7 +2856,7 @@ class PHPMailer
                     // Write out the encrypted message
                     $file = tempnam(sys_get_temp_dir(), 'mail');
                     if (false === file_put_contents($file, $this->MIMEHeader . static::$LE . static::$LE . $body)) {
-                        throw new phpmailerException($this->lang('encrypting') . ' Could not write temp file');
+                        throw new Exception($this->lang('encrypting') . ' Could not write temp file');
                     }
                     $encrypted = tempnam(sys_get_temp_dir(), 'encrypted');
 
@@ -2872,7 +2872,7 @@ class PHPMailer
                     } else {
                         @unlink($file);
                         @unlink($encrypted);
-                        throw new phpmailerException($this->lang('encrypting') . openssl_error_string());
+                        throw new Exception($this->lang('encrypting') . openssl_error_string());
                     }
                 }
             } catch (Exception $exc) {
